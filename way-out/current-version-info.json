@@ -1,0 +1,13 @@
+{
+    "info": [
+        {
+            "store_version": 9,
+            "game_version": "7.2.0",
+            "changelog": [
+                "Fixed Ad load stuck issue",
+                "Added Option to skip the story",
+                "Added tutorial for 2-player mode"
+            ]
+        }
+    ]
+}
