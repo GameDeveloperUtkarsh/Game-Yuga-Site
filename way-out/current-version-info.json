@@ -1,8 +1,12 @@
 {
     "info": [
         {
+            "name": "Way Out: Maze Puzzle",
             "store_version": 9,
             "game_version": "7.2.0",
+            "total_downloads": "1K+",
+            "game_size": "111 mb",
+            "update_size": "3.2 mb",
             "changelog": [
                 "Fixed Ad load stuck issue",
                 "Added Option to skip the story",
