@@ -9,9 +9,9 @@
             "update_size": "3.65 MB",
             "changelog": [
                 "Added a tutorial in 2-player mode",
-                "Fixed an issue where ads sometimes got stuck loading",
+                "Resolved ad loading stuck issue.",
                 "Added a Skip option in story mode",
-                "General improvements for smoother gameplay",
+                "Improvements for smoother gameplay",
                 "Various bug fixes"
             ]
         }
