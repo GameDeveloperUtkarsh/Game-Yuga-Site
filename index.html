@@ -2,179 +2,380 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <title>Game Yuga</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Utkarsh Anad | Game Yuga</title>
+  <meta name="description" content="About Game Yuga — a one‑person game studio led by Utkarsh Anad. Two published games on Google Play, thoughtful design, and cozy challenge loops." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg-dark: #1e0f2f;
-      --accent: #7f31be;
-      --text-light: #f3e8ff;
-      --box-bg: #2d1b44;
-      --input-bg: #3c2a5f;
+    :root{
+      --bg: #0f2424;
+      --bg-soft: #163131;
+      --primary: #e07a5f;
+      --primary-900: #b86249;
+      --primary-100: #f6e5df;
+      --secondary: #3d5a5b;
+      --ink: #f6f6f4;
+      --ink-dim: #cfd7d6;
+      --line: rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 10px;
+      --maxw: 1100px;
+      --gutter: clamp(16px, 3vw, 28px);
+      --stack-lg: clamp(48px, 6vw, 72px);
+      --stack-md: clamp(28px, 4vw, 44px);
+      --focus: 0 0 0 3px rgba(224,122,95,.35);
+      --h2: clamp(28px, 5vw, 44px);
+      --h3: clamp(20px, 3vw, 24px);
+      --body: clamp(14px, 1.5vw, 16px);
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      background:
+        radial-gradient(1000px 600px at 85% -10%, rgba(224,122,95,.08), transparent 50%),
+        radial-gradient(800px 500px at 0% 20%, rgba(61,90,91,.18), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.6;
+      font-size: var(--body);
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter)}
+
+    /* HERO */
+    .hero{
+      padding-block: var(--stack-lg) var(--stack-md);
+      background: linear-gradient(180deg, transparent, rgba(22,49,49,.22));
+      border-bottom:1px solid var(--line);
+    }
+    .hero .wrap{
+      display:grid; grid-template-columns:1.25fr .75fr;
+      gap: clamp(20px, 4vw, 38px); align-items:center;
+    }
+    .hero h2{
+      font-family:"Playfair Display", serif;
+      font-size: var(--h2);
+      line-height:1.15; margin:0 0 12px;
+    }
+    .lead{color:var(--ink-dim); margin:14px 0 24px}
+
+    .socials{display:flex; gap:12px; flex-wrap:wrap}
+    .iconBtn{
+      width:50px; height:50px; display:inline-flex; align-items:center; justify-content:center;
+      border-radius:12px; border:1px solid var(--line);
+      background: rgba(224,122,95,.06); color:var(--ink);
+      transition:.2s transform, .2s background, .2s border;
+    }
+    .iconBtn:hover{transform:translateY(-2px); background: rgba(224,122,95,.16); border-color: rgba(224,122,95,.35)}
+    .iconImg{width:30px; height:30px; object-fit: contain}
+
+    .heroPhoto{
+      background: linear-gradient(180deg, rgba(22,49,49,.6), rgba(22,49,49,.3));
+      border:1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding:10px; box-shadow: var(--shadow);
+      justify-self: end; /* keep photo from stretching too wide on mid screens */
+      width: clamp(280px, 28vw, 520px); /* desktop cap */
+    }
+    .heroPhoto img{
+      width:100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: calc(var(--radius-lg) - 6px);
+    }
+    /* Tablet tuning: keep portrait modest on iPad-like widths */
+    @media (max-width: 1024px){
+      .hero .wrap{grid-template-columns: 1.2fr .8fr}
+      .heroPhoto{width: min(380px, 40vw)}
+    }
+    /* Stack on small screens; center photo with a reasonable max */
+    @media (max-width: 820px){
+      .hero .wrap{grid-template-columns:1fr}
+      .heroPhoto{order:-1; justify-self: center; width: min(400px, 90vw)}
     }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-light);
+    /* SECTIONS */
+    .section{
+      padding: var(--stack-md) 0;
+      border-top:1px solid var(--line);
+      background: linear-gradient(180deg, transparent, rgba(22,49,49,.22));
+    }
+    .section h3{
+      font-size: var(--h3);
+      margin:0 0 18px; letter-spacing:.2px;
+      font-weight:600;
     }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+    /* GRID */
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap: clamp(12px, 3vw, 18px)}
+
+    /* CARDS */
+    .card{
+      background: linear-gradient(180deg, rgba(22,49,49,.65), rgba(22,49,49,.4));
+      border:1px solid var(--line); border-radius:var(--radius-lg);
+      overflow:hidden; box-shadow: var(--shadow); display:flex; flex-direction:column;
+    }
+    .thumbWrap{position:relative; border-bottom:1px solid var(--line); background:#132d2d}
+    .thumb{width:100%; aspect-ratio: 16 / 9; object-fit: cover}
+    .cardBody{padding:16px}
+    .cardBody h4{margin:0 0 8px}
+    .cardBody p{margin:0 0 12px; color:var(--ink-dim)}
+
+    /* Chips aligned with text */
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 0 0; padding:0}
+    .chip{
+      font-size:12px; color:var(--ink-dim);
+      border:1px solid var(--line); border-radius:999px;
+      padding:6px 10px; background: rgba(15,36,36,.55);
     }
 
-    .section {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
+    .actions{display:flex; gap:10px; padding:0 16px 16px; margin-top:auto}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:10px;
+      border:1px solid var(--line); color:var(--ink);
+      transition:.2s transform, .2s background, .2s border;
+      background: rgba(224,122,95,.1);
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(224,122,95,.18); border-color:rgba(224,122,95,.35)}
+    .btn.primary{background:var(--primary); color:#1b0f0b; border-color:transparent}
+    .btn.primary:hover{background:var(--primary-900)}
+    .btn .iconImg{width:18px; height:18px}
+
+    /* CONTACT GRID (stacks correctly) */
+    .contactGrid{display:grid; grid-template-columns: 2fr 1fr; gap: clamp(12px, 3vw, 18px)}
+    .contactCard{padding:16px}
+
+    footer{
+      padding:36px 0; border-top:1px solid var(--line);
+      color:var(--ink-dim);
     }
 
-    .coming-soon {
-      text-align: center;
-      background: var(--bg-dark);
+    /* RESPONSIVE */
+    @media (max-width: 1100px){
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 520px){
+      .grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 820px){
+      .contactGrid{grid-template-columns:1fr}
     }
 
-    .coming-soon h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .coming-soon p {
-      font-size: 1.2rem;
-      color: #cbb3e5;
-    }
-
-    .contact {
-      background-color: var(--box-bg);
-    }
-
-    .contact-box {
-      max-width: 600px;
-      width: 100%;
-      background-color: var(--input-bg);
-      padding: 3rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      text-align: center;
-    }
-
-    .contact-box h2 {
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      font-size: 1.8rem;
-    }
-
-    .contact-box p {
-      margin-bottom: 2rem;
-      color: #d9c2f3;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      text-align: left;
-    }
-
-    input, textarea {
-        padding: 0.75rem 1rem;
-        border: none;
-        border-radius: 8px;
-        background-color: #4c3272;
-        color: var(--text-light);
-        font-size: 1rem;
-        line-height: 1.5;
-        font-family: inherit; /* ensures same font */
-    }
-
-    textarea {
-      resize: none;
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #cbb3e5;
-    }
-
-    button {
-      padding: 0.75rem;
-      background-color: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #7b2cbf;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .section {
-        padding: 1.5rem;
-      }
-
-      .coming-soon h1 {
-        font-size: 2.2rem;
-      }
-    }
+    /* Accessibility */
+    a:focus-visible, button:focus-visible { outline: none; box-shadow: var(--focus); }
   </style>
 </head>
 <body>
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div class="wrap">
+        <div>
+          <h2>About Game Yuga</h2>
+          <p class="lead">
+            Game Yuga is a one‑person game studio led by Utkarsh Anad, crafting cozy challenge loops with readable UI and tight, satisfying mechanics for mobile players.
+          </p>
+          <div class="socials" aria-label="Social links">
+            <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Linkedin" rel="noopener">
+              <img class="iconImg" src="icons/linkedin.png" alt="Linkedin" />
+            </a>
+            <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Instagram" rel="noopener">
+              <img class="iconImg" src="icons/instagram.png" alt="Instagram" />
+            </a>
+            <a class="iconBtn" href="https://youtube.com/@YOUR_HANDLE" target="_blank" aria-label="YouTube" rel="noopener">
+              <img class="iconImg" src="icons/youtube.png" alt="YouTube" />
+            </a>
+            <a class="iconBtn" href="https://github.com/YOUR_HANDLE" target="_blank" aria-label="GitHub" rel="noopener">
+              <img class="iconImg" src="icons/github.png" alt="GitHub" />
+            </a>
+            <a class="iconBtn" href="https://commudle.com/YOUR_HANDLE" target="_blank" aria-label="Commudle" rel="noopener" title="Commudle">
+              <img class="iconImg" src="icons/commudle.png" alt="Commudle" />
+            </a>
+          </div>
+        </div>
 
-  <div class="container">
-    <!-- Top Half -->
-    <div class="section coming-soon">
+        <aside class="heroPhoto" aria-label="Founder photo">
+          <img
+            src="assets/utkarsh-portrait.png"
+            loading="lazy"
+            sizes="(max-width: 820px) 90vw, (max-width: 1024px) 40vw, 35vw"
+            alt="Portrait of Utkarsh Anad, founder and solo developer at Game Yuga" />
+        </aside>
+      </div>
+    </section>
+
+    <!-- PUBLISHED GAMES -->
+    <section class="section" id="games">
+      <div class="wrap">
+        <h3>Published games</h3>
+        <div class="grid">
+          <article class="card">
+            <div class="thumbWrap">
+              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/game1-thumb.png" alt="Game Title One — mobile game thumbnail" />
+            </div>
+            <div class="cardBody">
+              <h4>Game Title One</h4>
+              <p>A snug arcade loop with crisp controls and satisfying upgrades.</p>
+              <div class="chips">
+                <span class="chip">Unity</span>
+                <span class="chip">Mobile</span>
+                <span class="chip">Casual</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://play.google.com/store/apps/details?id=PLAY_STORE_LINK_1" target="_blank" rel="noopener">
+                <img class="iconImg" src="icons/google-play.png" alt="" aria-hidden="true" />
+                Google Play
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumbWrap">
+              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/game2-thumb.png" alt="Game Title Two — mobile game thumbnail" />
+            </div>
+            <div class="cardBody">
+              <h4>Game Title Two</h4>
+              <p>Tactical puzzles with soothing aesthetics and approachable depth.</p>
+              <div class="chips">
+                <span class="chip">Godot</span>
+                <span class="chip">Mobile</span>
+                <span class="chip">Puzzle</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn primary" href="https://play.google.com/store/apps/details?id=PLAY_STORE_LINK_2" target="_blank" rel="noopener">
+                <img class="iconImg" src="icons/google-play.png" alt="" aria-hidden="true" />
+                Google Play
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN PROJECTS -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <h3>Design projects</h3>
+        <div class="grid">
+          <article class="card">
+            <div class="thumbWrap">
+              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/figma-project-thumb-1.png" alt="Figma HUD & UX kit thumbnail" />
+            </div>
+            <div class="cardBody">
+              <h4>Figma: HUD & UX Kit</h4>
+              <p>Reusable components for mobile action games: HUD, menus, and popups.</p>
+              <div class="chips">
+                <span class="chip">Figma</span>
+                <span class="chip">Components</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="https://www.figma.com/file/YOUR_FIGMA_FILE_1" target="_blank" rel="noopener">
+                <img class="iconImg" src="icons/figma.png" alt="" aria-hidden="true" />
+                View Figma
+              </a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="thumbWrap">
+              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/figma-project-thumb-2.png" alt="Figma color palette thumbnail" />
+            </div>
+            <div class="cardBody">
+              <h4>Figma: Cozy Palette</h4>
+              <p>Color tokens and elevation styles tuned for readability and warmth.</p>
+              <div class="chips">
+                <span class="chip">Color</span>
+                <span class="chip">Tokens</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="https://www.figma.com/file/YOUR_FIGMA_FILE_2" target="_blank" rel="noopener">
+                <img class="iconImg" src="icons/figma.png" alt="" aria-hidden="true" />
+                View Figma
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <h3>Contact</h3>
+        <div class="contactGrid">
+          <form class="card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="cardBody">
+              <h4>Let’s build something</h4>
+              <p>For collaborations, publishing, or playtesting invites, drop a message.</p>
+              <div style="display:grid; gap:12px; margin-top:8px">
+                <input aria-label="Name" required name="name" placeholder="Your name" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(15,36,36,.45); color:var(--ink)"/>
+                <input aria-label="Email" required type="email" name="email" placeholder="you@example.com" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(15,36,36,.45); color:var(--ink)"/>
+                <textarea aria-label="Message" required name="message" rows="5" placeholder="Hello Utkarsh, I’d love to talk about…" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(15,36,36,.45); color:var(--ink)"></textarea>
+              </div>
+            </div>
+            <div class="actions" style="margin-top:-6px; padding-top:0">
+              <button class="btn primary" type="submit">
+                <img class="iconImg" src="icons/email.png" alt="" aria-hidden="true" />
+                Send message
+              </button>
+              <a class="btn" href="mailto:YOUR_EMAIL@example.com">
+                <img class="iconImg" src="icons/email.png" alt="" aria-hidden="true" />
+                Email
+              </a>
+            </div>
+          </form>
+
+          <div class="card contactCard">
+            <div class="cardBody">
+              <h4>Find me online</h4>
+              <p>Follow progress, trailers, and behind‑the‑scenes notes.</p>
+            </div>
+            <div class="actions" style="flex-wrap:wrap">
+              <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Linkedin" rel="noopener" title="Linkedin">
+                <img class="iconImg" src="icons/linkedin.png" alt="Linkedin" />
+              </a>
+              <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Instagram" rel="noopener" title="Instagram">
+                <img class="iconImg" src="icons/instagram.png" alt="Instagram" />
+              </a>
+              <a class="iconBtn" href="https://youtube.com/@YOUR_HANDLE" target="_blank" aria-label="YouTube" rel="noopener" title="YouTube">
+                <img class="iconImg" src="icons/youtube.png" alt="YouTube" />
+              </a>
+              <a class="iconBtn" href="https://github.com/YOUR_HANDLE" target="_blank" aria-label="GitHub" rel="noopener" title="GitHub">
+                <img class="iconImg" src="icons/github.png" alt="GitHub" />
+              </a>
+              <a class="iconBtn" href="https://commudle.com/YOUR_HANDLE" target="_blank" aria-label="Commudle" rel="noopener" title="Commudle">
+                <img class="iconImg" src="icons/commudle.png" alt="Commudle" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap">
+      <p style="margin:0">© <span id="y"></span> Utkarsh Anad • Game Yuga</p>
       <div>
-        <h1>Game Yuga</h1>
-        <p>Coming Soon - Good Things Take Time!</p>
+        <a class="btn" href="#about" style="border-radius:999px">Top</a>
       </div>
     </div>
-
-    <!-- Bottom Half -->
-    <div class="section contact">
-      <div class="contact-box">
-        <h2>Contact Me</h2>
-        <p>Want to reach out? Drop a message below:</p>
-        <form id="contact-form">
-          <input type="text" id="name" placeholder="Your Name" required />
-          <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
-    </div>
-  </div>
+  </footer>
 
   <script>
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value;
-      const message = document.getElementById('message').value;
-
-      const mailtoLink = `mailto:game.yuga.studio@gmail.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + "\n\nFrom: " + name)}`;
-      window.location.href = mailtoLink;
-    });
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
