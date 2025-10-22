@@ -2,15 +2,17 @@ import smtplib
 from email.message import EmailMessage
 import os
 
-# Form data (you can pass these via GitHub Actions inputs)
+# Form data
 user_name = os.getenv("USER_NAME")
 user_email = os.getenv("USER_EMAIL")
 user_body = os.getenv("USER_BODY")
 
-# Sender and recipient from GitHub Secrets
+# Sender credentials from GitHub Secrets
 sender_email = os.getenv("GMAIL_EMAIL")
 sender_password = os.getenv("GMAIL_APP_PASSWORD")
-recipient_email = os.getenv("RECIPIENT_EMAIL")
+
+# Recipient (public)
+recipient_email = "game.developer.utkarsh@gmail.com"
 
 # Compose email
 msg = EmailMessage()
