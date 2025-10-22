@@ -1,38 +1,40 @@
-name: Send Email
+name: Send Contact Email
 
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: "Sender's name"
+      user_name:
+        description: 'Name of the person'
         required: true
-      email:
-        description: "Sender's email address"
+      user_email:
+        description: 'Email of the person'
         required: true
-      body:
-        description: "Message body"
+      user_body:
+        description: 'Message content'
         required: true
 
 jobs:
-  send_mail_job:
+  send_email:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.x'
 
-      - name: Send email
+      - name: Install dependencies
+        run: pip install --upgrade pip
+
+      - name: Send Email
         env:
-          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
-        run: |
-          python "python codes/send_email.py" \
-            "${{ github.event.inputs.name }}" \
-            "${{ github.event.inputs.email }}" \
-            "${{ github.event.inputs.body }}"
+          USER_NAME: ${{ github.event.inputs.user_name }}
+          USER_EMAIL: ${{ github.event.inputs.user_email }}
+          USER_BODY: ${{ github.event.inputs.user_body }}
+          GMAIL_EMAIL: ${{ secrets.GMAIL_EMAIL }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: python "python codes/send_email.py"
