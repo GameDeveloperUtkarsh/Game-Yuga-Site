@@ -1,38 +1,34 @@
-name: Send Email
+# send_email.py
+import smtplib
+import sys
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import os
 
-on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: "Sender's name"
-        required: true
-      email:
-        description: "Sender's email address"
-        required: true
-      body:
-        description: "Message body"
-        required: true
+def send_mail(name, email, body):
+    sender = os.getenv("SENDER_EMAIL")
+    password = os.getenv("EMAIL_PASSWORD")
+    receiver = os.getenv("RECEIVER_EMAIL")  # where to send mail (your email)
 
-jobs:
-  send_mail_job:
-    runs-on: ubuntu-latest
+    msg = MIMEMultipart()
+    msg["From"] = sender
+    msg["To"] = receiver
+    msg["Subject"] = f"Message from {name}"
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    text = f"From: {name}\nEmail: {email}\n\nMessage:\n{body}"
+    msg.attach(MIMEText(text, "plain"))
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        server.starttls()
+        server.login(sender, password)
+        server.send_message(msg)
 
-      - name: Send email
-        env:
-          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
-        run: |
-          python "python codes/send_email.py" \
-            "${{ github.event.inputs.name }}" \
-            "${{ github.event.inputs.email }}" \
-            "${{ github.event.inputs.body }}"
+    print("✅ Email sent successfully!")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: python send_email.py <name> <email> <body>")
+        sys.exit(1)
+
+    _, name, email, body = sys.argv
+    send_mail(name, email, body)
