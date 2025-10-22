@@ -36,5 +36,4 @@ jobs:
           USER_BODY: ${{ github.event.inputs.user_body }}
           GMAIL_EMAIL: ${{ secrets.GMAIL_EMAIL }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
         run: python "python codes/send_email.py"
