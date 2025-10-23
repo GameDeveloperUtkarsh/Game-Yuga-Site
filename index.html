@@ -3,211 +3,366 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Utkarsh Anad | Game Yuga</title>
-  <meta name="description" content="About Game Yuga — a one‑person game studio led by Utkarsh Anad. Two published games on Google Play, thoughtful design, and cozy challenge loops." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <title>Utkarsh Anand | Game Yuga</title>
+  <meta name="description" content="An Unreal Engine game developer and the sole member of Game Yuga, handling everything from concept creation to publishing independently." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#08110e" />
+
   <style>
     :root{
-      --bg: #0f2424;
-      --bg-soft: #163131;
-      --primary: #e07a5f;
-      --primary-900: #b86249;
-      --primary-100: #f6e5df;
-      --secondary: #3d5a5b;
-      --ink: #f6f6f4;
-      --ink-dim: #cfd7d6;
-      --line: rgba(255,255,255,.08);
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --bg: #08110e;
+      --bg2: #0c1b16;
+      --ink: #eef6ef;
+      --ink-dim: #cfe1d2;
+      --line: rgba(230,255,235,.10);
+
+      --leaf: #6da34d;
+      --leaf-2: #4b8a3a;
+      --mint: #bcdcc0;
+      --teal: #1a3d30;
+      --shadow: 0 14px 42px rgba(0,0,0,.35);
+
+      --radius-xl: 26px;
       --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-sm: 10px;
-      --maxw: 1100px;
-      --gutter: clamp(16px, 3vw, 28px);
-      --stack-lg: clamp(48px, 6vw, 72px);
-      --stack-md: clamp(28px, 4vw, 44px);
-      --focus: 0 0 0 3px rgba(224,122,95,.35);
-      --h2: clamp(28px, 5vw, 44px);
-      --h3: clamp(20px, 3vw, 24px);
-      --body: clamp(14px, 1.5vw, 16px);
+      --maxw: 1180px;
+      --gutter: clamp(16px, 3vw, 32px);
+      --stack-lg: clamp(54px, 6vw, 92px);
+      --stack-md: clamp(28px, 4vw, 48px);
+      --h2: clamp(30px, 5.5vw, 52px);
+      --h3: clamp(20px, 3.2vw, 26px);
+      --body: clamp(14px, 1.6vw, 16px);
+      --ring: 0 0 0 3px rgba(109,163,77,.35);
     }
 
     *{box-sizing:border-box}
     html,body{
       margin:0;
-      background:
-        radial-gradient(1000px 600px at 85% -10%, rgba(224,122,95,.08), transparent 50%),
-        radial-gradient(800px 500px at 0% 20%, rgba(61,90,91,.18), transparent 55%),
-        var(--bg);
       color:var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height:1.6;
       font-size: var(--body);
+      position: relative;
+      background:
+        radial-gradient(1400px 800px at 80% -10%, rgba(109,163,77,.08), transparent 55%),
+        radial-gradient(900px 600px at 5% 25%, rgba(188,220,192,.10), transparent 60%),
+        var(--bg);
+      background-blend-mode: screen, overlay, normal;
     }
+
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
+    button{cursor:pointer;background:none;color:inherit;border:none}
 
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter)}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter); position:relative; z-index:1}
+
+    /* Decorative global spray under everything */
+    .spray{
+      position: fixed; inset: 0; pointer-events:none; z-index:-1;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(188,220,192,.6) 0 1px, transparent 1.2px),
+        radial-gradient(1.2px 1.2px at 30% 40%, rgba(109,163,77,.7) 0 1.1px, transparent 1.3px),
+        radial-gradient(1px 1px at 75% 30%, rgba(109,163,77,.5) 0 1px, transparent 1.2px),
+        radial-gradient(1.2px 1.2px at 55% 75%, rgba(188,220,192,.5) 0 1.1px, transparent 1.3px),
+        radial-gradient(1.1px 1.1px at 85% 60%, rgba(109,163,77,.6) 0 1px, transparent 1.2px);
+      background-size: 320px 320px, 380px 380px, 420px 420px, 360px 360px, 400px 400px;
+      mix-blend-mode: screen;
+    }
 
     /* HERO */
     .hero{
+      position:relative;
       padding-block: var(--stack-lg) var(--stack-md);
-      background: linear-gradient(180deg, transparent, rgba(22,49,49,.22));
       border-bottom:1px solid var(--line);
+      z-index:0;
     }
     .hero .wrap{
-      display:grid; grid-template-columns:1.25fr .75fr;
-      gap: clamp(20px, 4vw, 38px); align-items:center;
+      display:grid; grid-template-columns:1.15fr .85fr;
+      gap: clamp(24px, 4.6vw, 44px); align-items:center;
     }
-    .hero h2{
-      font-family:"Playfair Display", serif;
-      font-size: var(--h2);
-      line-height:1.15; margin:0 0 12px;
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
+      color:var(--ink-dim); background: rgba(26,61,48,.28);
+      backdrop-filter: blur(4px);
+      position: relative; z-index:1;
     }
-    .lead{color:var(--ink-dim); margin:14px 0 24px}
 
-    .socials{display:flex; gap:12px; flex-wrap:wrap}
+    /* Two-line headline with spray under second line only */
+    .headline{
+      margin:12px 0 10px;
+      line-height:1.05;
+      font-size: var(--h2);
+      font-weight:900;
+      position:relative;
+      z-index:1;
+    }
+    .headline .line{display:block}
+    .headline .name{letter-spacing:.3px}
+    .headline .role{position:relative; display:inline-block}
+    .headline .role::before{
+      content:"";
+      position:absolute; inset: 60% -8px auto -12px; height: 46%;
+      background:
+        radial-gradient(120% 120% at 20% 50%, rgba(109,163,77,.35), transparent 60%),
+        radial-gradient(120% 120% at 60% 40%, rgba(188,220,192,.25), transparent 55%),
+        linear-gradient(90deg, rgba(109,163,77,.5), rgba(188,220,192,.25) 60%, rgba(109,163,77,.4));
+      background-blend-mode: screen, overlay, normal;
+      filter: blur(2px);
+      z-index:-1;
+      mask-image: radial-gradient(140% 180% at 40% 50%, black 40%, transparent 75%);
+      border-radius: 10px;
+      pointer-events:none;
+    }
+
+    .lead{color:var(--ink-dim); margin:10px 0 18px; position: relative; z-index:1}
+
+    /* Email row (your sizes) */
+    .emailRow{
+      display:flex; align-items:center; gap:10px; margin:0 0 18px; flex-wrap:wrap; position: relative; z-index:1
+    }
+    .emailText{
+      padding:8px 12px; border:1px solid var(--line);
+      border-radius:10px; background: rgba(12,27,22,.55);
+      color:var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 16px;
+    }
+    .copyBtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:43px; height:43px; border-radius:10px; border:1px solid var(--line);
+      background: rgba(109,163,77,.10);
+      transition:.28s transform, .28s background, .28s border, .28s box-shadow;
+      position: relative; z-index:2;
+    }
+    .copyBtn:hover{
+      transform: translateY(-2px);
+      background: rgba(109,163,77,.2);
+      border-color: rgba(188,220,192,.35);
+      box-shadow: 0 6px 16px rgba(0,0,0,.28);
+    }
+    .copyBtnIcon{width:20px; height:20px; object-fit:contain}
+
+    .socials{display:flex; gap:12px; flex-wrap:wrap; margin-top:2px; position: relative; z-index:1}
     .iconBtn{
       width:50px; height:50px; display:inline-flex; align-items:center; justify-content:center;
       border-radius:12px; border:1px solid var(--line);
-      background: rgba(224,122,95,.06); color:var(--ink);
-      transition:.2s transform, .2s background, .2s border;
+      background: rgba(26,61,48,.45);
+      transition:.28s transform, .28s background, .28s border, .28s box-shadow;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      position: relative; z-index:2;
     }
-    .iconBtn:hover{transform:translateY(-2px); background: rgba(224,122,95,.16); border-color: rgba(224,122,95,.35)}
-    .iconImg{width:30px; height:30px; object-fit: contain}
+    .iconBtn:hover{
+      transform:translateY(-2px);
+      background: rgba(26,61,48,.65);
+      border-color: rgba(188,220,192,.35);
+      box-shadow: 0 6px 16px rgba(0,0,0,.25);
+    }
+    .iconImg{width:30px; height:30px; object-fit:contain}
 
+    /* Portrait: frame + parallax layers */
     .heroPhoto{
-      background: linear-gradient(180deg, rgba(22,49,49,.6), rgba(22,49,49,.3));
+      position: relative;
+      background: linear-gradient(180deg, rgba(26,61,48,.85), rgba(26,61,48,.55));
       border:1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding:10px; box-shadow: var(--shadow);
-      justify-self: end; /* keep photo from stretching too wide on mid screens */
-      width: clamp(280px, 28vw, 520px); /* desktop cap */
+      border-radius: var(--radius-xl);
+      padding:14px; box-shadow: var(--shadow);
+      justify-self: end;
+      width: clamp(280px, 28vw, 500px);
+      z-index:1;
+      overflow: hidden;
     }
-    .heroPhoto img{
-      width:100%;
-      aspect-ratio: 1/1;
+    .heroPhoto::after{
+      content:"";
+      position:absolute; inset: -1px;
+      border-radius: calc(var(--radius-xl) + 3px);
+      background:
+        radial-gradient(220% 160% at 10% 15%, rgba(109,163,77,.35), transparent 60%),
+        radial-gradient(180% 160% at 90% 80%, rgba(188,220,192,.25), transparent 55%),
+        radial-gradient(220% 160% at 60% 40%, rgba(109,163,77,.25), transparent 60%);
+      mix-blend-mode: screen;
+      filter: blur(14px);
+      opacity:.5;
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    .heroParallax{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: calc(var(--radius-xl) - 12px);
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+    .heroParallax .layer{
+      position:absolute; inset:0;
+      display:block; width:100%; height:100%;
       object-fit: cover;
-      border-radius: calc(var(--radius-lg) - 6px);
+      will-change: transform;
+      pointer-events:none;
+      transform-origin: center center;
+      transform: translate3d(0,0,0) scale(1);
     }
-    /* Tablet tuning: keep portrait modest on iPad-like widths */
+    .heroParallax .bg{ z-index: 1; transform: translate3d(0,0,0) scale(1.02) }
+    .heroParallax .fg{ z-index: 2; transform: translate3d(0,0,0) scale(1.04) }
+
+    /* Sections */
+    .section{
+      position:relative;
+      padding: var(--stack-md) 0 var(--stack-md);
+      border-top:1px solid var(--line);
+      z-index:0;
+    }
+    .section .wrap{position:relative; z-index:1}
+
+    /* Grid */
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap: clamp(14px, 3.2vw, 22px)}
+    @media (max-width: 1140px){ .grid{grid-template-columns:1fr 1fr} }
+    @media (max-width: 560px){ .grid{grid-template-columns:1fr} }
+
+    /* Cards */
+    .card{
+      position:relative;
+      background: linear-gradient(180deg, rgba(18,38,30,.85), rgba(18,38,30,.55));
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      overflow:hidden; box-shadow: var(--shadow);
+      transform: translateZ(0);
+      z-index:1;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset: -2px -2px auto -2px; height: 28%;
+      background:
+        radial-gradient(140% 200% at 10% 40%, rgba(109,163,77,.32), transparent 55%),
+        radial-gradient(160% 180% at 80% 30%, rgba(188,220,192,.22), transparent 55%);
+      mix-blend-mode: screen;
+      filter: blur(6px);
+      pointer-events:none;
+      z-index:0;
+    }
+    .thumbWrap{position:relative; border-bottom:1px solid var(--line); background:#0f241d; z-index:1}
+    .thumb{width:100%; aspect-ratio: 16 / 9; object-fit: cover}
+    .cardBody{padding:18px; position: relative; z-index:1}
+    .cardBody h4{margin:0 0 8px; font-weight:800; letter-spacing:.2px}
+    .cardBody p{margin:0 0 12px; color:var(--ink-dim)}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 0 0; padding:0}
+    .chip{
+      font-size:12px; color:var(--ink-dim);
+      border:1px solid var(--line); border-radius:999px;
+      padding:6px 10px; background: rgba(12,27,22,.6);
+      transition: .2s background, .2s border-color;
+      position: relative; z-index:1;
+    }
+    .chip:hover{background: rgba(109,163,77,.12); border-color: rgba(188,220,192,.35)}
+
+    .actions{display:flex; gap:10px; padding:0 18px 18px; margin-top:auto; position: relative; z-index:1}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:10px;
+      border:1px solid var(--line); color:var(--ink);
+      transition:.28s transform, .28s background, .28s border, .28s box-shadow;
+      background: rgba(109,163,77,.10);
+      position: relative; z-index:2;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      background:rgba(109,163,77,.20);
+      border-color:rgba(188,220,192,.35);
+      box-shadow: 0 6px 16px rgba(0,0,0,.26);
+    }
+    .btn .iconImg{width:18px; height:18px; object-fit:contain}
+
+    /* Disabled action style (for Steam placeholder) */
+    .btn.disabled,
+    .btn[aria-disabled="true"]{
+      opacity:.55;
+      cursor:not-allowed;
+      pointer-events:none; /* suppress interaction */
+      box-shadow:none;
+    }
+
+    /* Reveal defaults visible; JS switches to animated mode */
+    .reveal, .reveal-slow{opacity:1; transform:none}
+    .anim-ready .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease}
+    .anim-ready .reveal-slow{opacity:0; transform: translateY(14px); transition: opacity .95s ease, transform .95s ease}
+    .reveal.is-visible, .reveal-slow.is-visible{opacity:1 !important; transform:none !important}
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation: none !important; transition: none !important; scroll-behavior: auto !important}
+      .reveal, .reveal-slow{opacity:1 !important; transform:none !important}
+    }
+
+    /* Responsive hero */
     @media (max-width: 1024px){
-      .hero .wrap{grid-template-columns: 1.2fr .8fr}
-      .heroPhoto{width: min(380px, 40vw)}
+      .hero .wrap{grid-template-columns: 1.1fr .9fr}
+      .heroPhoto{width: min(360px, 38vw)}
     }
-    /* Stack on small screens; center photo with a reasonable max */
     @media (max-width: 820px){
       .hero .wrap{grid-template-columns:1fr}
       .heroPhoto{order:-1; justify-self: center; width: min(400px, 90vw)}
     }
 
-    /* SECTIONS */
-    .section{
-      padding: var(--stack-md) 0;
-      border-top:1px solid var(--line);
-      background: linear-gradient(180deg, transparent, rgba(22,49,49,.22));
-    }
-    .section h3{
-      font-size: var(--h3);
-      margin:0 0 18px; letter-spacing:.2px;
-      font-weight:600;
+    /* Tablet-only: keep each headline line on one line by shrinking font, not wrapping */
+    @media (min-width: 821px) and (max-width: 1100px){
+      .headline{ font-size: clamp(26px, 3.4vw, 40px) }
+      .headline .line{ white-space: nowrap }
     }
 
-    /* GRID */
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap: clamp(12px, 3vw, 18px)}
-
-    /* CARDS */
-    .card{
-      background: linear-gradient(180deg, rgba(22,49,49,.65), rgba(22,49,49,.4));
-      border:1px solid var(--line); border-radius:var(--radius-lg);
-      overflow:hidden; box-shadow: var(--shadow); display:flex; flex-direction:column;
-    }
-    .thumbWrap{position:relative; border-bottom:1px solid var(--line); background:#132d2d}
-    .thumb{width:100%; aspect-ratio: 16 / 9; object-fit: cover}
-    .cardBody{padding:16px}
-    .cardBody h4{margin:0 0 8px}
-    .cardBody p{margin:0 0 12px; color:var(--ink-dim)}
-
-    /* Chips aligned with text */
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 0 0; padding:0}
-    .chip{
-      font-size:12px; color:var(--ink-dim);
-      border:1px solid var(--line); border-radius:999px;
-      padding:6px 10px; background: rgba(15,36,36,.55);
-    }
-
-    .actions{display:flex; gap:10px; padding:0 16px 16px; margin-top:auto}
-    .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:10px;
-      border:1px solid var(--line); color:var(--ink);
-      transition:.2s transform, .2s background, .2s border;
-      background: rgba(224,122,95,.1);
-    }
-    .btn:hover{transform:translateY(-1px); background:rgba(224,122,95,.18); border-color:rgba(224,122,95,.35)}
-    .btn.primary{background:var(--primary); color:#1b0f0b; border-color:transparent}
-    .btn.primary:hover{background:var(--primary-900)}
-    .btn .iconImg{width:18px; height:18px}
-
-    /* CONTACT GRID (stacks correctly) */
-    .contactGrid{display:grid; grid-template-columns: 2fr 1fr; gap: clamp(12px, 3vw, 18px)}
-    .contactCard{padding:16px}
-
-    footer{
-      padding:36px 0; border-top:1px solid var(--line);
-      color:var(--ink-dim);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 1100px){
-      .grid{grid-template-columns:1fr 1fr}
-    }
-    @media (max-width: 520px){
-      .grid{grid-template-columns:1fr}
-    }
-    @media (max-width: 820px){
-      .contactGrid{grid-template-columns:1fr}
-    }
-
-    /* Accessibility */
-    a:focus-visible, button:focus-visible { outline: none; box-shadow: var(--focus); }
+    a:focus-visible, button:focus-visible{ outline: none; box-shadow: var(--ring) }
   </style>
 </head>
 <body>
+  <div class="spray" aria-hidden="true"></div>
+
   <main>
     <!-- HERO -->
     <section class="hero" id="about">
       <div class="wrap">
-        <div>
-          <h2>About Game Yuga</h2>
+        <div class="reveal">
+          <span class="eyebrow">Game Yuga • Indie Game Studio</span>
+
+          <h2 class="headline">
+            <span class="line name">Utkarsh Anand</span>
+            <span class="line role">Indie Game developer</span>
+          </h2>
+
           <p class="lead">
-            Game Yuga is a one‑person game studio led by Utkarsh Anad, crafting cozy challenge loops with readable UI and tight, satisfying mechanics for mobile players.
+            An Unreal Engine game developer and the sole member of Game Yuga, handling everything from concept creation to publishing independently.
           </p>
-          <div class="socials" aria-label="Social links">
-            <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Linkedin" rel="noopener">
-              <img class="iconImg" src="icons/linkedin.png" alt="Linkedin" />
+
+          <div class="emailRow">
+            <a class="emailText" id="emailText" href="mailto:game.developer.utkarsh@gmail.com">game.developer.utkarsh@gmail.com</a>
+            <button class="copyBtn" type="button" id="copyEmailBtn" aria-label="Copy email address">
+              <img class="copyBtnIcon" id="copyIcon" src="about-me/icons/copy.png" alt="" aria-hidden="true" />
+            </button>
+          </div>
+          <span id="copyStatus" aria-live="polite" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;"> </span>
+
+          <div class="socials">
+            <a class="iconBtn" href="https://www.linkedin.com/in/utkarsh-anand-gamedev" target="_blank" aria-label="LinkedIn" rel="noopener">
+              <img class="iconImg" src="about-me/icons/linkedin.png" alt="LinkedIn" />
             </a>
-            <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Instagram" rel="noopener">
-              <img class="iconImg" src="icons/instagram.png" alt="Instagram" />
+            <a class="iconBtn" href="https://www.commudle.com/users/Utkarsh_Anand" target="_blank" aria-label="Commudle" rel="noopener">
+              <img class="iconImg" src="about-me/icons/commudle.png" alt="Commudle" />
             </a>
-            <a class="iconBtn" href="https://youtube.com/@YOUR_HANDLE" target="_blank" aria-label="YouTube" rel="noopener">
-              <img class="iconImg" src="icons/youtube.png" alt="YouTube" />
+            <a class="iconBtn" href="https://www.instagram.com/game_yuga" target="_blank" aria-label="Instagram" rel="noopener">
+              <img class="iconImg" src="about-me/icons/instagram.png" alt="Instagram" />
             </a>
-            <a class="iconBtn" href="https://github.com/YOUR_HANDLE" target="_blank" aria-label="GitHub" rel="noopener">
-              <img class="iconImg" src="icons/github.png" alt="GitHub" />
+            <a class="iconBtn" href="https://www.youtube.com/@GameYuga" target="_blank" aria-label="YouTube" rel="noopener">
+              <img class="iconImg" src="about-me/icons/youtube.png" alt="YouTube" />
             </a>
-            <a class="iconBtn" href="https://commudle.com/YOUR_HANDLE" target="_blank" aria-label="Commudle" rel="noopener" title="Commudle">
-              <img class="iconImg" src="icons/commudle.png" alt="Commudle" />
+            <a class="iconBtn" href="https://github.com/GameDeveloperUtkarsh" target="_blank" aria-label="GitHub" rel="noopener">
+              <img class="iconImg" src="about-me/icons/github.png" alt="GitHub" />
             </a>
           </div>
         </div>
 
-        <aside class="heroPhoto" aria-label="Founder photo">
-          <img
-            src="assets/utkarsh-portrait.png"
-            loading="lazy"
-            sizes="(max-width: 820px) 90vw, (max-width: 1024px) 40vw, 35vw"
-            alt="Portrait of Utkarsh Anad, founder and solo developer at Game Yuga" />
+        <!-- Parallax portrait -->
+        <aside class="heroPhoto reveal-slow" aria-label="Founder photo">
+          <div class="heroParallax" id="portraitParallax">
+            <img class="layer bg" src="about-me/assets/utkarsh-portrait-bg.png" alt="" aria-hidden="true" />
+            <img class="layer fg" src="about-me/assets/utkarsh-portrait-fg.png" alt="Portrait of Utkarsh Anand, founder and solo developer at Game Yuga" />
+          </div>
         </aside>
       </div>
     </section>
@@ -215,45 +370,45 @@
     <!-- PUBLISHED GAMES -->
     <section class="section" id="games">
       <div class="wrap">
-        <h3>Published games</h3>
+        <h3 class="reveal">Published games</h3>
         <div class="grid">
-          <article class="card">
+          <article class="card reveal">
             <div class="thumbWrap">
-              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/game1-thumb.png" alt="Game Title One — mobile game thumbnail" />
+              <img class="thumb" loading="lazy" sizes="(max-width: 1140px) 50vw, (max-width: 560px) 100vw, 33vw" src="about-me/assets/game1-thumb.png" alt="Game Title One — mobile game thumbnail" />
             </div>
             <div class="cardBody">
-              <h4>Game Title One</h4>
-              <p>A snug arcade loop with crisp controls and satisfying upgrades.</p>
+              <h4>Way Out</h4>
+              <p>A maze solving mobile game developed in Unreal Engine, featuring 200 procedural levels and a story driven protagonist.</p>
               <div class="chips">
-                <span class="chip">Unity</span>
-                <span class="chip">Mobile</span>
-                <span class="chip">Casual</span>
-              </div>
-            </div>
-            <div class="actions">
-              <a class="btn primary" href="https://play.google.com/store/apps/details?id=PLAY_STORE_LINK_1" target="_blank" rel="noopener">
-                <img class="iconImg" src="icons/google-play.png" alt="" aria-hidden="true" />
-                Google Play
-              </a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="thumbWrap">
-              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/game2-thumb.png" alt="Game Title Two — mobile game thumbnail" />
-            </div>
-            <div class="cardBody">
-              <h4>Game Title Two</h4>
-              <p>Tactical puzzles with soothing aesthetics and approachable depth.</p>
-              <div class="chips">
-                <span class="chip">Godot</span>
+                <span class="chip">Unreal Engine</span>
                 <span class="chip">Mobile</span>
                 <span class="chip">Puzzle</span>
               </div>
             </div>
             <div class="actions">
-              <a class="btn primary" href="https://play.google.com/store/apps/details?id=PLAY_STORE_LINK_2" target="_blank" rel="noopener">
-                <img class="iconImg" src="icons/google-play.png" alt="" aria-hidden="true" />
+              <a class="btn" href="https://play.google.com/store/apps/details?id=com.gameyuga.wayout" target="_blank" rel="noopener">
+                <img class="iconImg" src="about-me/icons/google-play.png" alt="" aria-hidden="true" />
+                Google Play
+              </a>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="thumbWrap">
+              <img class="thumb" loading="lazy" sizes="(max-width: 1140px) 50vw, (max-width: 560px) 100vw, 33vw" src="about-me/assets/game2-thumb.png" alt="Game Title Two — mobile game thumbnail" />
+            </div>
+            <div class="cardBody">
+              <h4>Trivia Tales</h4>
+              <p>A trivia mobile game developed in Unreal Engine where players collect 86 billion neurons to evolve into a human.</p>
+              <div class="chips">
+                <span class="chip">Unreal Engine</span>
+                <span class="chip">Mobile</span>
+                <span class="chip">Trivia</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="https://play.google.com/store/apps/details?id=com.gameyuga.triviatales" target="_blank" rel="noopener">
+                <img class="iconImg" src="about-me/icons/google-play.png" alt="" aria-hidden="true" />
                 Google Play
               </a>
             </div>
@@ -265,44 +420,76 @@
     <!-- DESIGN PROJECTS -->
     <section class="section" id="projects">
       <div class="wrap">
-        <h3>Design projects</h3>
+        <h3 class="reveal">Design projects</h3>
         <div class="grid">
-          <article class="card">
+          <article class="card reveal">
             <div class="thumbWrap">
-              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/figma-project-thumb-1.png" alt="Figma HUD & UX kit thumbnail" />
+              <img class="thumb" loading="lazy" sizes="(max-width: 1140px) 50vw, (max-width: 560px) 100vw, 33vw" src="about-me/assets/figma-project-thumb-1.png" alt="Figma HUD & UX kit thumbnail" />
             </div>
             <div class="cardBody">
-              <h4>Figma: HUD & UX Kit</h4>
-              <p>Reusable components for mobile action games: HUD, menus, and popups.</p>
+              <h4>Way Out UI/UX Design</h4>
+              <p>Complete UI/UX design for Way Out, featuring menus, story screens and in-game interfaces</p>
               <div class="chips">
                 <span class="chip">Figma</span>
-                <span class="chip">Components</span>
+                <span class="chip">UI/UX</span>
+                <span class="chip">Mobile</span>
               </div>
             </div>
             <div class="actions">
-              <a class="btn" href="https://www.figma.com/file/YOUR_FIGMA_FILE_1" target="_blank" rel="noopener">
-                <img class="iconImg" src="icons/figma.png" alt="" aria-hidden="true" />
+              <a class="btn" href="https://www.figma.com/design/xx3kE4PvsBhdKJZ2L7KdBi/Way-Out-UI-Works" target="_blank" rel="noopener">
+                <img class="iconImg" src="about-me/icons/figma.png" alt="" aria-hidden="true" />
                 View Figma
               </a>
             </div>
           </article>
 
-          <article class="card">
+          <article class="card reveal">
             <div class="thumbWrap">
-              <img class="thumb" loading="lazy" sizes="(max-width: 1100px) 50vw, (max-width: 520px) 100vw, 33vw" src="assets/figma-project-thumb-2.png" alt="Figma color palette thumbnail" />
+              <img class="thumb" loading="lazy" sizes="(max-width: 1140px) 50vw, (max-width: 560px) 100vw, 33vw" src="about-me/assets/figma-project-thumb-2.png" alt="Figma color palette thumbnail" />
             </div>
             <div class="cardBody">
-              <h4>Figma: Cozy Palette</h4>
-              <p>Color tokens and elevation styles tuned for readability and warmth.</p>
+              <h4>Trivia Tales UI/UX Design</h4>
+              <p>UI/UX design for Trivia Tales, including menus, quiz screens, leaderboard, and gameplay interfaces.</p>
               <div class="chips">
-                <span class="chip">Color</span>
-                <span class="chip">Tokens</span>
+                <span class="chip">Figma</span>
+                <span class="chip">UI/UX</span>
+                <span class="chip">Mobile</span>
               </div>
             </div>
             <div class="actions">
-              <a class="btn" href="https://www.figma.com/file/YOUR_FIGMA_FILE_2" target="_blank" rel="noopener">
-                <img class="iconImg" src="icons/figma.png" alt="" aria-hidden="true" />
+              <a class="btn" href="https://www.figma.com/design/HUorUYMqIEjzv1vhaOUSCz/Trivia-Tales-UI-Works" target="_blank" rel="noopener">
+                <img class="iconImg" src="about-me/icons/figma.png" alt="" aria-hidden="true" />
                 View Figma
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONGOING PROJECTS (new) -->
+    <section class="section" id="ongoing">
+      <div class="wrap">
+        <h3 class="reveal">Ongoing projects</h3>
+        <div class="grid">
+          <article class="card reveal">
+            <div class="thumbWrap">
+              <img class="thumb" loading="lazy" sizes="(max-width: 1140px) 50vw, (max-width: 560px) 100vw, 33vw" src="about-me/assets/ongoing1-thumb.png" alt="Ongoing Project One — in development thumbnail" />
+            </div>
+            <div class="cardBody">
+              <h4>Project Codename: Canvas</h4>
+              <p>A multiplayer dungeon solving game that demands teamwork and real time strategy.</p>
+              <div class="chips">
+                <span class="chip">Unreal Engine</span>
+                <span class="chip">PC Game</span>
+                <span class="chip">Multiplayer</span>
+              </div>
+            </div>
+            <div class="actions">
+              <!-- Disabled Steam button: announced and non-interactive -->
+              <a class="btn disabled" role="link" aria-disabled="true" tabindex="-1">
+                <img class="iconImg" src="about-me/icons/steam.png" alt="" aria-hidden="true" />
+                Steam (soon)
               </a>
             </div>
           </article>
@@ -313,69 +500,174 @@
     <!-- CONTACT -->
     <section class="section" id="contact">
       <div class="wrap">
-        <h3>Contact</h3>
+        <h3 class="reveal">Contact</h3>
         <div class="contactGrid">
-          <form class="card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form class="card reveal" action="https://formspree.io/f/xblzebba" method="POST" style="padding-bottom:4px">
             <div class="cardBody">
               <h4>Let’s build something</h4>
-              <p>For collaborations, publishing, or playtesting invites, drop a message.</p>
-              <div style="display:grid; gap:12px; margin-top:8px">
-                <input aria-label="Name" required name="name" placeholder="Your name" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(15,36,36,.45); color:var(--ink)"/>
-                <input aria-label="Email" required type="email" name="email" placeholder="you@example.com" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(15,36,36,.45); color:var(--ink)"/>
-                <textarea aria-label="Message" required name="message" rows="5" placeholder="Hello Utkarsh, I’d love to talk about…" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(15,36,36,.45); color:var(--ink)"></textarea>
+              <p>Use the form or email above to get in touch.</p>
+              <div style="display:grid; gap:12px; margin-top:10px">
+                <input aria-label="Name" required name="name" placeholder="Your name" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(12,27,22,.6); color:var(--ink)"/>
+                <input aria-label="Email" required type="email" name="email" placeholder="you@example.com" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(12,27,22,.6); color:var(--ink)"/>
+                <textarea aria-label="Message" required name="message" rows="5" placeholder="Hello Utkarsh, I’d love to talk about…" style="padding:12px 14px; border-radius:10px; border:1px solid var(--line); background: rgba(12,27,22,.6); color:var(--ink)"></textarea>
               </div>
             </div>
             <div class="actions" style="margin-top:-6px; padding-top:0">
-              <button class="btn primary" type="submit">
-                <img class="iconImg" src="icons/email.png" alt="" aria-hidden="true" />
+              <button class="btn" type="submit">
+                <img class="iconImg" src="about-me/icons/send.png" alt="" aria-hidden="true" />
                 Send message
               </button>
-              <a class="btn" href="mailto:YOUR_EMAIL@example.com">
-                <img class="iconImg" src="icons/email.png" alt="" aria-hidden="true" />
-                Email
-              </a>
             </div>
           </form>
-
-          <div class="card contactCard">
-            <div class="cardBody">
-              <h4>Find me online</h4>
-              <p>Follow progress, trailers, and behind‑the‑scenes notes.</p>
-            </div>
-            <div class="actions" style="flex-wrap:wrap">
-              <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Linkedin" rel="noopener" title="Linkedin">
-                <img class="iconImg" src="icons/linkedin.png" alt="Linkedin" />
-              </a>
-              <a class="iconBtn" href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Instagram" rel="noopener" title="Instagram">
-                <img class="iconImg" src="icons/instagram.png" alt="Instagram" />
-              </a>
-              <a class="iconBtn" href="https://youtube.com/@YOUR_HANDLE" target="_blank" aria-label="YouTube" rel="noopener" title="YouTube">
-                <img class="iconImg" src="icons/youtube.png" alt="YouTube" />
-              </a>
-              <a class="iconBtn" href="https://github.com/YOUR_HANDLE" target="_blank" aria-label="GitHub" rel="noopener" title="GitHub">
-                <img class="iconImg" src="icons/github.png" alt="GitHub" />
-              </a>
-              <a class="iconBtn" href="https://commudle.com/YOUR_HANDLE" target="_blank" aria-label="Commudle" rel="noopener" title="Commudle">
-                <img class="iconImg" src="icons/commudle.png" alt="Commudle" />
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap">
-      <p style="margin:0">© <span id="y"></span> Utkarsh Anad • Game Yuga</p>
-      <div>
-        <a class="btn" href="#about" style="border-radius:999px">Top</a>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Copy email to clipboard with icon-only feedback (copy.png -> tick.png)
+    (function(){
+      const btn = document.getElementById('copyEmailBtn');
+      const emailEl = document.getElementById('emailText');
+      const icon = document.getElementById('copyIcon');
+      const status = document.getElementById('copyStatus');
+      if (!btn || !emailEl || !icon) return;
+
+      async function copy(text){
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.focus(); ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+      }
+
+      let resetTimer = null;
+      btn.addEventListener('click', async () => {
+        const href = emailEl.getAttribute('href') || '';
+        const email = href.startsWith('mailto:') ? href.replace('mailto:','') : (emailEl.textContent || '').trim();
+        try {
+          await copy(email);
+          btn.setAttribute('aria-label', 'Copied email address');
+          icon.src = 'about-me/icons/tick.png';
+          if (status) status.textContent = 'Email copied';
+          clearTimeout(resetTimer);
+          resetTimer = setTimeout(() => {
+            btn.setAttribute('aria-label', 'Copy email address');
+            icon.src = 'about-me/icons/copy.png';
+            if (status) status.textContent = '';
+          }, 1500);
+        } catch (err) {
+          btn.setAttribute('aria-label', 'Copy failed');
+          if (status) status.textContent = 'Copy failed';
+          clearTimeout(resetTimer);
+          resetTimer = setTimeout(() => {
+            btn.setAttribute('aria-label', 'Copy email address');
+            if (status) status.textContent = '';
+          }, 1500);
+        }
+      });
+    })();
+
+    // Scroll reveal: gate animations so content is visible by default
+    (function(){
+      const docEl = document.documentElement;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function inView(el){
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight * 0.85 && r.bottom > 0;
+      }
+
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal, .reveal-slow').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+      const els = document.querySelectorAll('.reveal, .reveal-slow');
+      els.forEach(el => {
+        if (inView(el)) el.classList.add('is-visible');
+        else observer.observe(el);
+      });
+
+      docEl.classList.add('anim-ready');
+    })();
+
+    // Pointer parallax for portrait (bg + fg) with updated ranges/scales
+    (function(){
+      const container = document.getElementById('portraitParallax');
+      if (!container) return;
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(pointer: fine)').matches;
+      if (reduce || !finePointer) return;
+
+      const bg = container.querySelector('.bg');
+      const fg = container.querySelector('.fg');
+      if (!bg || !fg) return;
+
+      let targetX = 0, targetY = 0;
+      let curX = 0, curY = 0;
+      let rafId = null;
+
+      const FG_MAX = 8;
+      const BG_MAX = 4;
+      const FG_SCALE = 1.04;
+      const BG_SCALE = 1.02;
+      const EASE = 0.08;
+
+      function onMove(e){
+        const rect = container.getBoundingClientRect();
+        const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+        targetX = Math.max(-1, Math.min(1, nx));
+        targetY = Math.max(-1, Math.min(1, ny));
+        if (rafId === null) rafId = requestAnimationFrame(tick);
+      }
+      function onLeave(){
+        targetX = 0; targetY = 0;
+        if (rafId === null) rafId = requestAnimationFrame(tick);
+      }
+      function tick(){
+        curX += (targetX - curX) * EASE;
+        curY += (targetY - curY) * EASE;
+
+        const fgX = (-curX) * FG_MAX;
+        const fgY = (-curY) * FG_MAX;
+        const bgX = (curX) * BG_MAX;
+        const bgY = (curY) * BG_MAX;
+
+        fg.style.transform = `translate3d(${fgX}px, ${fgY}px, 0) scale(${FG_SCALE})`;
+        bg.style.transform = `translate3d(${bgX}px, ${bgY}px, 0) scale(${BG_SCALE})`;
+
+        if (Math.abs(targetX - curX) > 0.001 || Math.abs(targetY - curY) > 0.001) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          rafId = null;
+        }
+      }
+
+      container.addEventListener('mousemove', onMove, { passive: true });
+      container.addEventListener('mouseleave', onLeave, { passive: true });
+
+      fg.style.transform = `translate3d(0,0,0) scale(${FG_SCALE})`;
+      bg.style.transform = `translate3d(0,0,0) scale(${BG_SCALE})`;
+    })();
   </script>
 </body>
 </html>
