@@ -2,17 +2,15 @@
     "info": [
         {
             "name": "Way Out: Maze Puzzle",
-            "store_version": 10,
-            "game_version": "7.3.0",
+            "store_version": 13,
+            "game_version": "7.4.0",
             "total_downloads": "1K+",
-            "game_size": "115 mb",
-            "update_size": "3.65 MB",
+            "game_size": "126 mb",
+            "update_size": "111 MB",
             "changelog": [
-                "Added a tutorial in 2-player mode",
-                "Resolved ad loading stuck issue.",
-                "Added a Skip option in story mode",
-                "Gameplay improvements",
-                "Various bug fixes"
+                "Improved compatibility across a wider range of devices",
+                "Reduced ad duration for a better experience",
+                "Fixed minor bugs and improved stability"
             ]
         }
     ]
